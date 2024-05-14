@@ -31,12 +31,27 @@ const db =
 ];
 
 const handleRequest = ((req, res)=> {
-    res.end(JSON.stringify({
-        message: 'Connection'
-    }));
-})
+    if(req.url === '/joke' && req.method === 'GET') {
+        res.writeHead(200)
+        res.end(JSON.stringify({
+            message: 'Successful',
+            data: db
+        }));
+    } else if(req.url === '/joke' && req.method === 'POST') {
+
+    } else if(req.url === '/joke/:id' && req.method === 'PATCH') {
+
+    } else if(req.url === '/joke/:id' && req.method === 'DELETE') {
+
+    } else {
+        res.writeHead(404);
+        res.end(JSON.stringify({
+            error: 'Not found',
+        }));
+
+    }
+});
 
 const server = http.createServer(handleRequest);
-
 
 server.listen(PORT, ()=> console.log(`Server listening on port ${PORT}...`));
